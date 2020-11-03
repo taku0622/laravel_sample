@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SampleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('welcome');
 });
+
+// Route::get('/sample', 'SampleController@index');
+Route::get('/sample', [SampleController::class, 'index']);
+
+Route::get('/select', [SampleController::class, 'select']);
+
+Route::get('/select_many', [SampleController::class, 'selectMany']);
+
+Route::get('/insert', [SampleController::class, 'insert']);
+
+Route::get('/delete', [SampleController::class, 'delete']);
+
+Route::get('/update', [SampleController::class, 'update']);
