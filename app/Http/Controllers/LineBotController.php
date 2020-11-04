@@ -20,7 +20,8 @@ class LineBotController extends Controller
 
     public function parrot(Request $request)
     {
-        error_log("hello");
+        error_log($request->header());
+        error_log($request->input();
         // Log::debug($request->header());
         // Log::debug($request->input());
 
