@@ -19,8 +19,8 @@ class LineBotController extends Controller
     {
         error_log("hello.....");
 
-        $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
-        $lineBot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
+        $httpClient = new CurlHTTPClient(env('LINE_ACCESS_TOKEN'));
+        $lineBot = new LINEBot($httpClient, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
 
         $signature = $request->header('x-line-signature');
         if (!$lineBot->validateSignature($request->getContent(), $signature)) {
