@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SampleController;
+use App\Http\Controllers\SampleFormController;
+use App\Http\Controllers\LineBotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,20 @@ Route::get('/insert', [SampleController::class, 'insert']);
 Route::get('/delete', [SampleController::class, 'delete']);
 
 Route::get('/update', [SampleController::class, 'update']);
+
+Route::get('/form/index', [SampleFormController::class, 'index']);
+// Route::get('/form/index', 'SampleFormController@index');
+
+Route::get('/form/show/{id}', [SampleFormController::class, 'show']);
+
+Route::post('/form/store', [SampleFormController::class, 'store']);
+// Route::post('/form/store', 'SampleFormController@store');
+
+Route::post('/form/delete', [SampleFormController::class, 'delete']);
+// Route::post('/form/delete', 'SampleFormController@delete');
+
+Route::post('/form/update', [SampleFormController::class, 'update']);
+// Route::post('/form/update', 'SampleFormController@update');
+
+Route::get('/hello', [LineBotController::class, 'index']);
+// Route::get('/hello', 'LineBotController@index');
