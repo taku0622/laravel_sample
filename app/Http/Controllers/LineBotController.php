@@ -13,6 +13,6 @@ class LineBotController extends Controller
 
     public function parrot(Request $request)
     {
-        error_log($request);
+        error_log(json_encode($request, JSON_UNESCAPED_UNICODE);
     }
 }
