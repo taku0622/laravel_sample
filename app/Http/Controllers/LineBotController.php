@@ -23,6 +23,7 @@ class LineBotController extends Controller
     {
         // error_log($request->header());
         // error_log($request->input();
+        error_log("hello.....");
         // Log::debug($request->header());
         // Log::debug($request->input());
 
