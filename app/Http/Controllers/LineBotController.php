@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use LINE\LINEBot\Event\MessageEvent\TextMessage;
 
 class LineBotController extends Controller
 {
@@ -31,6 +32,19 @@ class LineBotController extends Controller
         $signature = $request->header('x-line-signature');
         if (!$lineBot->validateSignature($request->getContent(), $signature)) {
             abort(400, 'Invalid signature');
+        }
+
+        $events = $lineBot->parseEventRequest($request->getContent(), $signature);
+
+        foreach ($events as $event) {
+            if (!($event instanceof TextMessage)) {
+                // Log::debug('Non text message has come');
+                continue;
+            }
+
+            $replyToken = $event->getReplyToken();
+            $replyText = $event->getText();
+            $lineBot->replyText($replyToken, $replyText);
         }
     }
 }
