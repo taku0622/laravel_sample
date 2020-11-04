@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// ==========ここから追加==========
-// use Illuminate\Support\Facades\Log;
-// ==========ここまで追加==========
-
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\Event\MessageEvent\TextMessage;
@@ -21,11 +17,7 @@ class LineBotController extends Controller
 
     public function parrot(Request $request)
     {
-        // error_log($request->header());
-        // error_log($request->input();
         error_log("hello.....");
-        // Log::debug($request->header());
-        // Log::debug($request->input());
 
         $httpClient = new CurlHTTPClient(getenv('CHANNEL_ACCESS_TOKEN'));
         $lineBot = new LINEBot($httpClient, ['channelSecret' => getenv('CHANNEL_SECRET')]);
@@ -39,7 +31,7 @@ class LineBotController extends Controller
 
         foreach ($events as $event) {
             if (!($event instanceof TextMessage)) {
-                // Log::debug('Non text message has come');
+                // error_log($event);
                 continue;
             }
 

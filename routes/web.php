@@ -49,5 +49,3 @@ Route::post('/form/update', [SampleFormController::class, 'update']);
 
 Route::get('/hello', [LineBotController::class, 'index']);
 // Route::get('/hello', 'LineBotController@index');
-
-// Route::post('/parrot', [LineBotController::class, 'parrot']);
