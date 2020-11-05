@@ -31,7 +31,7 @@ class LineBotController extends Controller
 
         foreach ($events as $event) {
             if (!($event instanceof TextMessage)) {
-                // error_log($event);
+                error_log(json_decode($event));
                 continue;
             }
 
