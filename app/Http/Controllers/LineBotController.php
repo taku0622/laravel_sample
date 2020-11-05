@@ -31,12 +31,13 @@ class LineBotController extends Controller
 
         foreach ($events as $event) {
             if (!($event instanceof TextMessage)) {
-                error_log(json_decode($event));
+                // error_log(json_decode($event));
                 continue;
             }
 
             $replyToken = $event->getReplyToken();
             $replyText = $event->getText();
+            error_log("replytext : " . $replyText);
             $lineBot->replyText($replyToken, $replyText);
         }
     }
