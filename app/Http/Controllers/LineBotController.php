@@ -72,8 +72,10 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
 
             $replyToken = $event->getReplyToken();
-            $pochi = Pet::find(1);
+            // $pochi = Pet::find(1);
+            $pochi = json_decode(Pet::find(1), true);
             error_log(gettype($pochi));
+
             $replyText = $event->getText();
             $lineBot->replyText($replyToken, $replyText);
         }
