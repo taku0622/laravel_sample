@@ -37,6 +37,7 @@ class LineBotController extends Controller
             }
             // eventを見る
             error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
+            error_log($event);
 
             $gurunavi = new Gurunavi();
             $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
