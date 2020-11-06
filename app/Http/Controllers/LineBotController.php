@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Gurunavi;
+use App\Services\Front;
 
 use Illuminate\Http\Request;
 
@@ -38,24 +39,25 @@ class LineBotController extends Controller
             // eventを見る
             // error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
             // error_log($event);
+            ###########################################################################
+            // $gurunavi = new Gurunavi();
+            // $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
 
-            $gurunavi = new Gurunavi();
-            $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
+            // if (array_key_exists('error', $gurunaviResponse)) {
+            //     $replyText = $gurunaviResponse['error'][0]['message'];
+            //     $replyToken = $event->getReplyToken();
+            //     $lineBot->replyText($replyToken, $replyText);
+            //     continue;
+            // }
 
-            if (array_key_exists('error', $gurunaviResponse)) {
-                $replyText = $gurunaviResponse['error'][0]['message'];
-                $replyToken = $event->getReplyToken();
-                $lineBot->replyText($replyToken, $replyText);
-                continue;
-            }
-
-            $replyText = '';
-            foreach ($gurunaviResponse['rest'] as $restaurant) {
-                $replyText .=
-                    $restaurant['name'] . "\n" .
-                    $restaurant['url'] . "\n" .
-                    "\n";
-            }
+            // $replyText = '';
+            // foreach ($gurunaviResponse['rest'] as $restaurant) {
+            //     $replyText .=
+            //         $restaurant['name'] . "\n" .
+            //         $restaurant['url'] . "\n" .
+            //         "\n";
+            // }
+            #############################################################
 
             $replyToken = $event->getReplyToken();
             $userId = $event->getUserId();
@@ -64,12 +66,28 @@ class LineBotController extends Controller
             error_log("replytoken: " . $replyToken);
             error_log("userId: " . $userId);
             error_log("text: " . $text);
+            // $this->postToApp($userId, $replyToken, $text);
+            // $lineBot->replyText($replyToken, $replyText);
+
+            $replyToken = $event->getReplyToken();
+            $replyText = $event->getText();
             $lineBot->replyText($replyToken, $replyText);
         }
     }
 
-    // public function post(Type $var = null)
-    // {
-    //     # code...
-    // }
+    public function postToApp($userId, $replyToken, $text)
+    {
+        $messages =
+            [
+                "type" => "text",
+                "text" =>  $text . "だニャン🐾"
+            ];
+        $array = [
+            'replyToken' => $replyToken,
+            'messages' => [
+                $messages
+            ]
+        ];
+        $json =  json_encode($array, JSON_UNESCAPED_UNICODE);
+    }
 }
