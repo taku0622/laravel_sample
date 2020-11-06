@@ -36,8 +36,8 @@ class LineBotController extends Controller
                 continue;
             }
             // eventを見る
-            error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
-            error_log($event);
+            // error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
+            // error_log($event);
 
             $gurunavi = new Gurunavi();
             $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
@@ -58,7 +58,12 @@ class LineBotController extends Controller
             }
 
             $replyToken = $event->getReplyToken();
+            $userId = $event->getUserId();
+            $text = $event->getText();
             // error_log("replytext : " . $replyText);
+            error_log("replytoken: " . $replyToken);
+            error_log("userId: " . $userId);
+            error_log("text: " . $text);
             $lineBot->replyText($replyToken, $replyText);
         }
     }
