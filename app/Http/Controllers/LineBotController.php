@@ -79,6 +79,7 @@ class LineBotController extends Controller
             error_log($name);
 
             $replyText = $event->getText();
+            $replyText = $name;
             $lineBot->replyText($replyToken, $replyText);
         }
     }
