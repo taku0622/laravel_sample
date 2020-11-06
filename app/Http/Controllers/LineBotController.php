@@ -7,6 +7,8 @@ use App\Services\Front;
 
 use Illuminate\Http\Request;
 
+use App\Models\Pet;
+
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\Event\MessageEvent\TextMessage;
@@ -70,6 +72,8 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
 
             $replyToken = $event->getReplyToken();
+            $pochi = Pet::find(1);
+            error_log(gettype($pochi));
             $replyText = $event->getText();
             $lineBot->replyText($replyToken, $replyText);
         }
