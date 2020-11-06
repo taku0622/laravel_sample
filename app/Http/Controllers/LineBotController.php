@@ -33,9 +33,10 @@ class LineBotController extends Controller
 
         foreach ($events as $event) {
             if (!($event instanceof TextMessage)) {
-                // error_log(json_decode($event));
                 continue;
             }
+            // eventを見る
+            error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
 
             $gurunavi = new Gurunavi();
             $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
@@ -56,8 +57,13 @@ class LineBotController extends Controller
             }
 
             $replyToken = $event->getReplyToken();
-            error_log("replytext : " . $replyText);
+            // error_log("replytext : " . $replyText);
             $lineBot->replyText($replyToken, $replyText);
         }
     }
+
+    // public function post(Type $var = null)
+    // {
+    //     # code...
+    // }
 }
