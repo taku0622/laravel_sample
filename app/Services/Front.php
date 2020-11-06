@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class Front
 {
-  private const RESTAURANTS_SEARCH_API_URL = 'https://tut-line-bot-test.glitch.me/push';
+  private const RESTAURANTS_SEARCH_API_URL = 'https://tut-php-api.herokuapp.com/api';
 
   public function post()
   {
