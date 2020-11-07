@@ -1,8 +1,8 @@
 <?php
 
-use App\Services\db;
+// use App\Services;
 
-require_once('db.php');
+// require_once('db.php');
 
 define('TABLE_NAME_CONVERSATIONS', 'conversations');
 
