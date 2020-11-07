@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Services\Gurunavi;
 // use App\Services\Front;
 use App\Services\dbConnection;
@@ -81,7 +82,10 @@ class LineBotController extends Controller
 
             # ペットの呼び出し
             // $pet = Pet::find(1);
-            $pet = json_decode(Pet::find(1), true);
+            // $pet = json_decode(Pet::find(1), true);
+            // $pet = DB::table('pets')->first();
+            $pet = json_decode(DB::table('pets')->first(), true);
+            // $pet = DB::table('pets')->first();
             $name = $pet["name"];
 
             # 今の名前を返信
