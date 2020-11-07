@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Gurunavi;
 use App\Services\Front;
+use App\Services\Watson;
 
 use Illuminate\Http\Request;
 
@@ -42,61 +43,55 @@ class LineBotController extends Controller
             // error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
             // error_log($event);
             ###########################################################################
-            // $gurunavi = new Gurunavi();
-            // $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
+            $gurunavi = new Gurunavi();
+            $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
 
-            // if (array_key_exists('error', $gurunaviResponse)) {
-            //     $replyText = $gurunaviResponse['error'][0]['message'];
-            //     $replyToken = $event->getReplyToken();
-            //     $lineBot->replyText($replyToken, $replyText);
-            //     continue;
-            // }
+            if (array_key_exists('error', $gurunaviResponse)) {
+                $replyText = $gurunaviResponse['error'][0]['message'];
+                $replyToken = $event->getReplyToken();
+                $lineBot->replyText($replyToken, $replyText);
+                continue;
+            }
 
-            // $replyText = '';
-            // foreach ($gurunaviResponse['rest'] as $restaurant) {
-            //     $replyText .=
-            //         $restaurant['name'] . "\n" .
-            //         $restaurant['url'] . "\n" .
-            //         "\n";
-            // }
+            $replyText = '';
+            foreach ($gurunaviResponse['rest'] as $restaurant) {
+                $replyText .=
+                    $restaurant['name'] . "\n" .
+                    $restaurant['url'] . "\n" .
+                    "\n";
+            }
             #############################################################
 
-            $replyToken = $event->getReplyToken();
-            $userId = $event->getUserId();
-            $text = $event->getText();
+            // $replyToken = $event->getReplyToken();
+            // $userId = $event->getUserId();
+            // $text = $event->getText();
             // error_log("replytext : " . $replyText);
-            error_log("replytoken: " . $replyToken);
-            error_log("userId: " . $userId);
-            error_log("text: " . $text);
+            // error_log("replytoken: " . $replyToken);
+            // error_log("userId: " . $userId);
+            // error_log("text: " . $text);
             // $this->postToApp($userId, $replyToken, $text);
-            // $lineBot->replyText($replyToken, $replyText);
-
-            $replyToken = $event->getReplyToken();
-            // $pochi = Pet::find(1);
-            $pochi = json_decode(Pet::find(1), true);
-            $name = $pochi["name"];
-            error_log(gettype($name));
-            error_log($name);
-
-            $replyText = $event->getText();
-            $replyText = $name;
             $lineBot->replyText($replyToken, $replyText);
+            #############################################################
+            // $replyToken = $event->getReplyToken();
+            // $pochi = Pet::find(1);
+            // $pochi = json_decode(Pet::find(1), true);
+            // $name = $pochi["name"];
+            // error_log(gettype($name));
+            // error_log($name);
+
+            // $replyText = $event->getText();
+            // $replyText = $name;
+            // $lineBot->replyText($replyToken, $replyText);
+            #############################################################
+
         }
     }
 
-    public function postToApp($userId, $replyToken, $text)
+    public function talkToWatson(Request $request, Watson $CWA)
     {
-        $messages =
-            [
-                "type" => "text",
-                "text" =>  $text . "だニャン🐾"
-            ];
-        $array = [
-            'replyToken' => $replyToken,
-            'messages' => [
-                $messages
-            ]
-        ];
-        $json =  json_encode($array, JSON_UNESCAPED_UNICODE);
+        $response      = $CWA->call($request->spokenword, session('context') ? session('context') : []);
+        $responseArray = json_decode($response, true);
+        $request->session()->put('context', $responseArray['context']);
+        return $response;
     }
 }
