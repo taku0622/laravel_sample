@@ -83,24 +83,24 @@ class LineBotController extends Controller
             # ペットの呼び出し
             // $pet = Pet::find(1);
             // $pet = json_decode(Pet::find(1), true);
-            $pet = DB::table('pets')->where('id', 1)->value('name');
-            error_log(gettype($pet));
-            error_log(json_encode($pet, JSON_UNESCAPED_UNICODE));
+            $name = DB::table('pets')->where('id', 1)->value('name');
+            error_log($name);
+            // error_log(json_encode($pet, JSON_UNESCAPED_UNICODE));
             // $pet = json_decode(DB::table('pets')->first(), true);
             // $pet = DB::table('pets')->first();
-            $name = $pet->name;
+            // $name = $pet->name;
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
             // $pet = Pet::find(1);
-            $pet->update(['name' => $text]);
+            // $pet->update(['name' => $text]);
 
             // $pochi = json_decode(Pet::find(1), true);
             // $name = $pochi["name"];
-            $message = "名前を変更しました\n" . $pet->name;
-            $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
+            // $message = "名前を変更しました\n" . $pet->name;
+            // $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
 
             #############################################################
