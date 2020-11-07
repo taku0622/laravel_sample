@@ -83,7 +83,7 @@ class LineBotController extends Controller
             # ペットの呼び出し
             // $pet = Pet::find(1);
             // $pet = json_decode(Pet::find(1), true);
-            $pet = DB::table('pets')->first();
+            $pet = DB::table('pets')->where('id', 1);
             error_log(gettype($pet));
             // $pet = json_decode(DB::table('pets')->first(), true);
             // $pet = DB::table('pets')->first();
@@ -93,7 +93,7 @@ class LineBotController extends Controller
             $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
-            $pet = Pet::find(1);
+            // $pet = Pet::find(1);
             $pet->update(['name' => $text]);
 
             // $pochi = json_decode(Pet::find(1), true);
