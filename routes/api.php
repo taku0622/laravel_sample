@@ -22,5 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/restaurants', [LineBotController::class, 'restaurants']);
 Route::post('/talk_to_watson', [LineBotController::class, 'talkToWatson']);
-Route::post('talk_to_watson', 'WatsonCallController@talkToWatson')->name('talk_to_watson');
+// Route::post('talk_to_watson', 'WatsonCallController@talkToWatson')->name('talk_to_watson');
 // Route::post('/restaurants', 'LineBotController@restaurants');

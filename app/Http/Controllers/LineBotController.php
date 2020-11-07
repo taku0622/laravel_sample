@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Services\Gurunavi;
 use App\Services\Front;
-use App\Services\Watson;
+// use App\Services\Watson;
 
 use Illuminate\Http\Request;
 
 use App\Models\Pet;
+use App\Models\Conversation;
 
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
@@ -45,14 +46,12 @@ class LineBotController extends Controller
             ###########################################################################
             $gurunavi = new Gurunavi();
             $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
-
             if (array_key_exists('error', $gurunaviResponse)) {
                 $replyText = $gurunaviResponse['error'][0]['message'];
                 $replyToken = $event->getReplyToken();
                 $lineBot->replyText($replyToken, $replyText);
                 continue;
             }
-
             $replyText = '';
             foreach ($gurunaviResponse['rest'] as $restaurant) {
                 $replyText .=
@@ -60,9 +59,9 @@ class LineBotController extends Controller
                     $restaurant['url'] . "\n" .
                     "\n";
             }
-            #############################################################
-
             $replyToken = $event->getReplyToken();
+            $lineBot->replyText($replyToken, $replyText);
+            #############################################################
             // $userId = $event->getUserId();
             // $text = $event->getText();
             // error_log("replytext : " . $replyText);
@@ -70,7 +69,7 @@ class LineBotController extends Controller
             // error_log("userId: " . $userId);
             // error_log("text: " . $text);
             // $this->postToApp($userId, $replyToken, $text);
-            $lineBot->replyText($replyToken, $replyText);
+            // $lineBot->replyText($replyToken, $replyText);
             #############################################################
             // $replyToken = $event->getReplyToken();
             // $pochi = Pet::find(1);
@@ -84,6 +83,7 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
             #############################################################
 
+            #############################################################
         }
     }
 
