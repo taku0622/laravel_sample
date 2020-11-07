@@ -84,7 +84,12 @@ class LineBotController extends Controller
             $replyText = $event->getText();
             $replyText = $name;
             $lineBot->replyText($replyToken, $replyText);
-            $lineBot->replyText($replyToken, $replyText);
+            $userId = $event->getUserId();
+            $pochi = Pet::find(1);
+            $pochi = json_decode(Pet::find(1), true);
+            $name = $pochi["name"];
+            $message = "名前を変更しました\n" . $name;
+            $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
 
             #############################################################
