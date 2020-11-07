@@ -85,6 +85,7 @@ class LineBotController extends Controller
             // $pet = json_decode(Pet::find(1), true);
             $pet = DB::table('pets')->where('id', 1);
             error_log(gettype($pet));
+            error_log(json_encode($pet, JSON_UNESCAPED_UNICODE));
             // $pet = json_decode(DB::table('pets')->first(), true);
             // $pet = DB::table('pets')->first();
             $name = $pet->name;
