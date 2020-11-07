@@ -87,7 +87,7 @@ class LineBotController extends Controller
             error_log(gettype($pet));
             // $pet = json_decode(DB::table('pets')->first(), true);
             // $pet = DB::table('pets')->first();
-            $name = $pet["name"];
+            $name = $pet->name;
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
