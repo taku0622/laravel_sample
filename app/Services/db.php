@@ -11,7 +11,8 @@ class dbConnection
   // インスタンス
   protected static $db;
   // コンストラクタ
-  private function __construct()
+  // private function __construct()
+  function __construct()
   {
 
     try {
