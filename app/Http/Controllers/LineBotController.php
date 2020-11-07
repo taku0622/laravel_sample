@@ -83,8 +83,9 @@ class LineBotController extends Controller
             # ペットの呼び出し
             // $pet = Pet::find(1);
             // $pet = json_decode(Pet::find(1), true);
-            // $pet = DB::table('pets')->first();
-            $pet = json_decode(DB::table('pets')->first(), true);
+            $pet = DB::table('pets')->first();
+            error_log(gettype($pet));
+            // $pet = json_decode(DB::table('pets')->first(), true);
             // $pet = DB::table('pets')->first();
             $name = $pet["name"];
 
