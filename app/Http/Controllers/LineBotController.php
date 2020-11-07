@@ -62,7 +62,7 @@ class LineBotController extends Controller
             }
             #############################################################
 
-            // $replyToken = $event->getReplyToken();
+            $replyToken = $event->getReplyToken();
             // $userId = $event->getUserId();
             // $text = $event->getText();
             // error_log("replytext : " . $replyText);
@@ -87,11 +87,11 @@ class LineBotController extends Controller
         }
     }
 
-    public function talkToWatson(Request $request, Watson $CWA)
-    {
-        $response      = $CWA->call($request->spokenword, session('context') ? session('context') : []);
-        $responseArray = json_decode($response, true);
-        $request->session()->put('context', $responseArray['context']);
-        return $response;
-    }
+    // public function talkToWatson(Request $request, Watson $CWA)
+    // {
+    //     $response      = $CWA->call($request->spokenword, session('context') ? session('context') : []);
+    //     $responseArray = json_decode($response, true);
+    //     $request->session()->put('context', $responseArray['context']);
+    //     return $response;
+    // }
 }
