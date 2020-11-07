@@ -62,28 +62,29 @@ class LineBotController extends Controller
             // $replyToken = $event->getReplyToken();
             // $lineBot->replyText($replyToken, $replyText);
             #############################################################
-            $userId = $event->getUserId();
-            $text = $event->getText();
-            $replyText = $this->watson($userId, $text);
-            $replyToken = $event->getReplyToken();
-            error_log("replytext : " . $replyText);
-            error_log("replytoken: " . $replyToken);
-            error_log("userId: " . $userId);
+            // $userId = $event->getUserId();
+            // $text = $event->getText();
+            // $replyText = $this->watson($userId, $text);
+            // $replyToken = $event->getReplyToken();
+            // error_log("replytext : " . $replyText);
+            // error_log("replytoken: " . $replyToken);
+            // error_log("userId: " . $userId);
             // error_log("text: " . $text);
             // $this->postToApp($userId, $replyToken, $text);
-            $lineBot->replyText($replyToken, $replyText);
-            $lineBot->replyText($replyToken, $replyText);
-            #############################################################
-            // $replyToken = $event->getReplyToken();
-            // $pochi = Pet::find(1);
-            // $pochi = json_decode(Pet::find(1), true);
-            // $name = $pochi["name"];
-            // error_log(gettype($name));
-            // error_log($name);
-
-            // $replyText = $event->getText();
-            // $replyText = $name;
             // $lineBot->replyText($replyToken, $replyText);
+            // $lineBot->replyText($replyToken, $replyText);
+            #############################################################
+            $replyToken = $event->getReplyToken();
+            $pochi = Pet::find(1);
+            $pochi = json_decode(Pet::find(1), true);
+            $name = $pochi["name"];
+            error_log(gettype($name));
+            error_log($name);
+
+            $replyText = $event->getText();
+            $replyText = $name;
+            $lineBot->replyText($replyToken, $replyText);
+            $lineBot->replyText($replyToken, $replyText);
             #############################################################
 
             #############################################################
