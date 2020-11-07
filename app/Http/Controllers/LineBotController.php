@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Services\Gurunavi;
-use App\Services\Front;
-// use App\Services\Watson;
+// use App\Services\Front;
+use App\Services\Watson;
 
 use Illuminate\Http\Request;
 
-use App\Models\Pet;
-use App\Models\Conversation;
+// use App\Models\Pet;
+// use App\Models\Conversation;
 
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
@@ -44,32 +44,34 @@ class LineBotController extends Controller
             // error_log(json_encode($event, JSON_UNESCAPED_UNICODE));
             // error_log($event);
             ###########################################################################
-            $gurunavi = new Gurunavi();
-            $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
-            if (array_key_exists('error', $gurunaviResponse)) {
-                $replyText = $gurunaviResponse['error'][0]['message'];
-                $replyToken = $event->getReplyToken();
-                $lineBot->replyText($replyToken, $replyText);
-                continue;
-            }
-            $replyText = '';
-            foreach ($gurunaviResponse['rest'] as $restaurant) {
-                $replyText .=
-                    $restaurant['name'] . "\n" .
-                    $restaurant['url'] . "\n" .
-                    "\n";
-            }
-            $replyToken = $event->getReplyToken();
-            $lineBot->replyText($replyToken, $replyText);
+            // $gurunavi = new Gurunavi();
+            // $gurunaviResponse = $gurunavi->searchRestaurants($event->getText());
+            // if (array_key_exists('error', $gurunaviResponse)) {
+            //     $replyText = $gurunaviResponse['error'][0]['message'];
+            //     $replyToken = $event->getReplyToken();
+            //     $lineBot->replyText($replyToken, $replyText);
+            //     continue;
+            // }
+            // $replyText = '';
+            // foreach ($gurunaviResponse['rest'] as $restaurant) {
+            //     $replyText .=
+            //         $restaurant['name'] . "\n" .
+            //         $restaurant['url'] . "\n" .
+            //         "\n";
+            // }
+            // $replyToken = $event->getReplyToken();
+            // $lineBot->replyText($replyToken, $replyText);
             #############################################################
-            // $userId = $event->getUserId();
-            // $text = $event->getText();
-            // error_log("replytext : " . $replyText);
-            // error_log("replytoken: " . $replyToken);
-            // error_log("userId: " . $userId);
+            $userId = $event->getUserId();
+            $text = $event->getText();
+            $replyText = watson($userId, $text);
+            $replyToken = $event->getReplyToken();
+            error_log("replytext : " . $replyText);
+            error_log("replytoken: " . $replyToken);
+            error_log("userId: " . $userId);
             // error_log("text: " . $text);
             // $this->postToApp($userId, $replyToken, $text);
-            // $lineBot->replyText($replyToken, $replyText);
+            $lineBot->replyText($replyToken, $replyText);
             #############################################################
             // $replyToken = $event->getReplyToken();
             // $pochi = Pet::find(1);
