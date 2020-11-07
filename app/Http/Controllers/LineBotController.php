@@ -98,7 +98,7 @@ class LineBotController extends Controller
 
             // $pochi = json_decode(Pet::find(1), true);
             // $name = $pochi["name"];
-            $message = "名前を変更しました\n" . $pet['name'];
+            $message = "名前を変更しました\n" . $pet->name;
             $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
 
