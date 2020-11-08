@@ -5,14 +5,13 @@ namespace App\Services;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 
-use function GuzzleHttp\json_encode;
+// use function GuzzleHttp\json_encode;
 
 class Watson
 {
   public function watson($userId, $text)
   {
     $data = array('input' => array("text" => $text));
-    #####################################################
     // 前回までの会話のデータがデータベースに保存されていれば
     if ($this->getLastConversationData($userId)) {
       $lastConversationData = $this->getLastConversationData($userId);
@@ -27,15 +26,12 @@ class Watson
         )
       );
     }
-
-    #####################################################
     $data_json = json_encode($data, JSON_UNESCAPED_UNICODE);
     $headers = ['Content-Type' => 'application/json', 'Content-Length' => strlen($data_json)];
     $curlOpts = [
       CURLOPT_USERPWD        => 'apikey:' . getenv('WATSON_API_KEY'),
       CURLOPT_POSTFIELDS     => $data_json,
     ];
-    // $guzzleClient = new Client(['base_uri' => 'https://gateway-fra.watsonplatform.net/assistant/api/v1/workspaces/']);
     $client = new Client(['base_uri' => 'https://api.us-south.assistant.watson.cloud.ibm.com/v1/workspaces/']);
     $path = getenv('WATSON_SKILL_ID') . '/message?version=2020-10-16';
     $response = $client->request('POST', $path, ['headers' => $headers, 'curl' => $curlOpts])->getBody()->getContents();
@@ -53,28 +49,11 @@ class Watson
     // Conversationからの返答を取得
     $outputText = $json['output']['text'][count($json['output']['text']) - 1];
     return $outputText;
-    // return $guzzleClient
-    #####################################################
-    // $client = new Client();
-    // $response = $client
-    //   ->post(self::WATSON_API_URL, [
-    //     'query' => [
-    //       'keyid' => getenv('GURUNAVI_ACCESS_KEY'),
-    //       'freeword' => str_replace(' ', ',', $word),
-    //     ],
-    //     'http_errors' => false,
-    //   ]);
-
-    // return json_decode($response->getBody()->getContents(), true);
   }
   // データベースから会話データを取得
   public function getLastConversationData($userId)
   {
     $data = DB::table('conversations')->where('userid', $userId)->get()->first();
-    // $dbh = dbConnection::getConnection();
-    // $sql = 'select conversation_id, dialog_node from ' . TABLE_NAME_CONVERSATIONS . ' where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
-    // $sth = $dbh->prepare($sql);
-    // $sth->execute(array($userId));
     if (!$data) {
       return NULL;
     } else {
@@ -93,20 +72,12 @@ class Watson
         'dialog_node' => $dialogNode,
         'userid' => $userId
       ]);
-      // $dbh = dbConnection::getConnection();
-      // $sql = 'insert into ' . TABLE_NAME_CONVERSATIONS . ' (conversation_id, dialog_node, userid) values (?, ?, pgp_sym_encrypt(?, \'' . getenv('DB_ENCRYPT_PASS') . '\'))';
-      // $sth = $dbh->prepare($sql);
-      // $sth->execute(array($conversationId, $dialogNode, $userId));
     } else {
       DB::table('conversations')->where('userid', $userId)
         ->update([
           'conversation_id' => $conversationId,
           'dialog_node' => $dialogNode,
         ]);
-      // $dbh = dbConnection::getConnection();
-      // $sql = 'update ' . TABLE_NAME_CONVERSATIONS . ' set conversation_id = ?, dialog_node = ? where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
-      // $sth = $dbh->prepare($sql);
-      // $sth->execute(array($conversationId, $dialogNode, $userId));
     }
   }
 }
