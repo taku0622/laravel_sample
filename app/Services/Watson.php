@@ -5,8 +5,6 @@ namespace App\Services;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 
-// use function GuzzleHttp\json_encode;
-
 class Watson
 {
   public function watson($userId, $text)
