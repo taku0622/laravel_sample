@@ -9,7 +9,7 @@ use App\Services\dbConnection;
 
 use Illuminate\Http\Request;
 
-use App\Models\Pet;
+// use App\Models\Pet;
 // use App\Models\Conversation;
 
 use LINE\LINEBot;
@@ -81,29 +81,18 @@ class LineBotController extends Controller
             $text = $event->getText();
 
             # ペットの呼び出し
-            // $pet = Pet::find(1);
-            // $pet = json_decode(Pet::find(1), true);
-            $name = DB::table('pets')->where('id', 1)->value('name');
+            $name = DB::table('pets')->where('name', "こ")->value('id');
             error_log($name);
-            // error_log(json_encode($pet, JSON_UNESCAPED_UNICODE));
-            // $pet = json_decode(DB::table('pets')->first(), true);
-            // $pet = DB::table('pets')->first();
-            // $name = $pet->name;
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
-            // $pet = Pet::find(1);
-            // $pet->update(['name' => $text]);
-            $name = DB::table('pets')->where('id', 1)->update(['name' => $text]);
+            // $name = DB::table('pets')->where('id', 1)->update(['name' => $text]);
 
-
-            // $pochi = json_decode(Pet::find(1), true);
-            // $name = $pochi["name"];
-            $afname = DB::table('pets')->where('id', 1)->value('name');
-            $message = "名前を変更しました\n" . $afname;
-            $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
+            // $afname = DB::table('pets')->where('id', 1)->value('name');
+            // $message = "名前を変更しました\n" . $afname;
+            // $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
 
             #############################################################
