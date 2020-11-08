@@ -39,7 +39,7 @@ class Watson
     $client = new Client(['base_uri' => 'https://api.us-south.assistant.watson.cloud.ibm.com/v1/workspaces/']);
     $path = getenv('WATSON_SKILL_ID') . '/message?version=2020-10-16';
     $response = $client->request('POST', $path, ['headers' => $headers, 'curl' => $curlOpts])->getBody()->getContents();
-    error_log(json_encode($response));
+    error_log(json_encode($response, JSON_UNESCAPED_UNICODE));
     // return $guzzleClient
     #####################################################
     // $client = new Client();
