@@ -96,22 +96,22 @@ class LineBotController extends Controller
             // $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
             # データ取得
-            $userId = $event->getUserId();
-            $replyToken = $event->getReplyToken();
-            $text = $event->getText();
-
-            $pet = new dbConnection();
-            $Response = $pet->searchPet($text);
-            $lineBot->replyText($replyToken, $Response);
-            #############################################################
-            # データ取得
             // $userId = $event->getUserId();
             // $replyToken = $event->getReplyToken();
             // $text = $event->getText();
 
-            // $watson = new Watson();
-            // $Response = $watson->watson($userId, $text);
+            // $pet = new dbConnection();
+            // $Response = $pet->searchPet($text);
             // $lineBot->replyText($replyToken, $Response);
+            #############################################################
+            # データ取得
+            $userId = $event->getUserId();
+            $replyToken = $event->getReplyToken();
+            $text = $event->getText();
+
+            $watson = new Watson();
+            $Response = $watson->watson($userId, $text);
+            $lineBot->replyText($replyToken, $Response);
             // #############################################################
         }
     }
