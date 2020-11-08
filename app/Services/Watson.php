@@ -46,6 +46,13 @@ class Watson
     error_log($conversationId);
     error_log($dialogNode);
 
+    // データベースに保存
+    $conversationData = array('conversation_id' => $conversationId, 'dialog_node' => $dialogNode);
+    $this->setLastConversationData($userId, $conversationData);
+
+    // Conversationからの返答を取得
+    $outputText = $json['output']['text'][count($json['output']['text']) - 1];
+    return $outputText;
     // return $guzzleClient
     #####################################################
     // $client = new Client();
@@ -60,7 +67,7 @@ class Watson
 
     // return json_decode($response->getBody()->getContents(), true);
   }
-
+  // データベースから会話データを取得
   public function getLastConversationData($userId)
   {
     $data = DB::table('conversations')->where('userid', $userId)->get()->first();
@@ -72,6 +79,34 @@ class Watson
       return NULL;
     } else {
       return array('conversation_id' => $data->conversation_id, 'dialog_node' => $data->dialog_node);
+    }
+  }
+  // 会話データをデータベースに保存
+  public function setLastConversationData($userId, $lastConversationData)
+  {
+    $conversationId = $lastConversationData['conversation_id'];
+    $dialogNode = $lastConversationData['dialog_node'];
+
+    if (!($this->getLastConversationData($userId))) {
+      DB::table('conversations')->insert([
+        'conversation_id' => $conversationId,
+        'dialog_node' => $dialogNode,
+        'userid' => $userId
+      ]);
+      // $dbh = dbConnection::getConnection();
+      // $sql = 'insert into ' . TABLE_NAME_CONVERSATIONS . ' (conversation_id, dialog_node, userid) values (?, ?, pgp_sym_encrypt(?, \'' . getenv('DB_ENCRYPT_PASS') . '\'))';
+      // $sth = $dbh->prepare($sql);
+      // $sth->execute(array($conversationId, $dialogNode, $userId));
+    } else {
+      DB::table('conversations')->where('userid', $userId)
+        ->update([
+          'conversation_id' => $conversationId,
+          'dialog_node' => $dialogNode,
+        ]);
+      // $dbh = dbConnection::getConnection();
+      // $sql = 'update ' . TABLE_NAME_CONVERSATIONS . ' set conversation_id = ?, dialog_node = ? where ? = pgp_sym_decrypt(userid, \'' . getenv('DB_ENCRYPT_PASS') . '\')';
+      // $sth = $dbh->prepare($sql);
+      // $sth->execute(array($conversationId, $dialogNode, $userId));
     }
   }
 }
