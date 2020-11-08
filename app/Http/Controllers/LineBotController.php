@@ -75,17 +75,18 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
             // $lineBot->replyText($replyToken, $replyText);
             #############################################################
-            # データ取得
-            $userId = $event->getUserId();
-            $replyToken = $event->getReplyToken();
-            $text = $event->getText();
+            // # データ取得
+            // $userId = $event->getUserId();
+            // $replyToken = $event->getReplyToken();
+            // $text = $event->getText();
 
-            # ペットの呼び出し
-            $name = DB::table('pets')->where('name', "こ")->value('id');
-            error_log($name);
 
-            # 今の名前を返信
-            $lineBot->replyText($replyToken, $name);
+            // # ペットの呼び出し
+            // $name = DB::table('pets')->where('name', "こ")->value('id');
+            // error_log($name);
+
+            // # 今の名前を返信
+            // $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
             // $name = DB::table('pets')->where('id', 1)->update(['name' => $text]);
@@ -94,7 +95,14 @@ class LineBotController extends Controller
             // $message = "名前を変更しました\n" . $afname;
             // $lineBot->pushMessage($userId, new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message));
             #############################################################
+            # データ取得
+            $userId = $event->getUserId();
+            $replyToken = $event->getReplyToken();
+            $text = $event->getText();
 
+            $pet = new dbConnection();
+            $Response = $pet->searchPet($text);
+            $lineBot->replyText($replyToken, $Response);
             #############################################################
         }
     }
