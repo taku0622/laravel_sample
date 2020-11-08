@@ -16,6 +16,9 @@ class dbConnection
     // # ペットの呼び出し
     $name = DB::table('pets')->where('name', $word)->value('id');
     error_log($name);
+    if (!$name) {
+      $name = "not data";
+    }
     return $name;
     // $client = new Client();
     // $response = $client
