@@ -40,6 +40,12 @@ class Watson
     $path = getenv('WATSON_SKILL_ID') . '/message?version=2020-10-16';
     $response = $client->request('POST', $path, ['headers' => $headers, 'curl' => $curlOpts])->getBody()->getContents();
     error_log(json_encode($response, JSON_UNESCAPED_UNICODE));
+    $json = json_decode($response, true);
+    $conversationId = $json["context"]["conversation_id"];
+    $dialogNode = $json["context"]["system"]["dialog_stack"][0]["dialog_node"];
+    error_log($conversationId);
+    error_log($dialogNode);
+
     // return $guzzleClient
     #####################################################
     // $client = new Client();
