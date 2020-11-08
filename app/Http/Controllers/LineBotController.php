@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\Gurunavi;
 // use App\Services\Front;
 use App\Services\dbConnection;
-
+use App\Services\Watson;
 use Illuminate\Http\Request;
 
 // use App\Models\Pet;
@@ -104,6 +104,15 @@ class LineBotController extends Controller
             $Response = $pet->searchPet($text);
             $lineBot->replyText($replyToken, $Response);
             #############################################################
+            # データ取得
+            // $userId = $event->getUserId();
+            // $replyToken = $event->getReplyToken();
+            // $text = $event->getText();
+
+            // $watson = new Watson();
+            // $Response = $watson->watson($userId, $text);
+            // $lineBot->replyText($replyToken, $Response);
+            // #############################################################
         }
     }
 

@@ -15,6 +15,10 @@ class dbConnection
   {
     // # ペットの呼び出し
     $name = DB::table('pets')->where('name', $word)->value('id');
+    $n = DB::table('pets')->where('name', "こ");
+    error_log(gettype($n));
+    error_log(json_encode($n, JSON_UNESCAPED_UNICODE));
+    error_log($n);
     error_log($name);
     if (!$name) {
       $name = "not data";
