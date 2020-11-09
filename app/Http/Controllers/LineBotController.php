@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use App\Services\Gurunavi;
-// use App\Services\Front;
-use App\Services\dbConnection;
 use App\Services\Watson;
 use Illuminate\Http\Request;
 
