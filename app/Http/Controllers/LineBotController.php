@@ -108,7 +108,7 @@ class LineBotController extends Controller
             $userId = $event->getUserId();
             $replyToken = $event->getReplyToken();
             $text = $event->getText();
-            if ($text = "質問") {
+            if ($text == "質問") {
                 $watson = new Watson();
                 $Response = $watson->watson($userId, $text);
             } else {
