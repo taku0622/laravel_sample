@@ -151,7 +151,7 @@ class LineBotController extends Controller
     {
         $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
         error_log("cancelInfomations: " . $cancelInfomations);
-        if ($cancelInfomations == []) {
+        if (!$cancelInfomations) {
             $message = "あなたの学部の休講案内はありません";
         } else {
             foreach ($cancelInfomations as $cancelInfomation) {
