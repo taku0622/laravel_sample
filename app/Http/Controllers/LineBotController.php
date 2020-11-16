@@ -130,7 +130,7 @@ class LineBotController extends Controller
 
             # 学生の呼び出し
             error_log("userid : " . $userId);
-            $name = DB::table('students')->where('user_id', "U6e0f4008a090ff5b5bef0323cae3428e")->value('number');
+            $name = DB::table('students')->where('user_id', $userId)->value('number');
             error_log("3" . $name);
 
             # 今の名前を返信
