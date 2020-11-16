@@ -74,24 +74,24 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
             #############################################################
             // # データ取得
-            $userId = $event->getUserId();
-            $replyToken = $event->getReplyToken();
-            $text = $event->getText();
+            // $userId = $event->getUserId();
+            // $replyToken = $event->getReplyToken();
+            // $text = $event->getText();
 
 
-            # ペットの呼び出し
-            $name = DB::table('pets')->where('name', $text)->value('id');
-            error_log($name);
+            // # ペットの呼び出し
+            // $name = DB::table('pets')->where('name', $text)->value('id');
+            // error_log($name);
 
-            $name = DB::table('pets');
-            error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
-            $name = DB::table('pets')->where('name', "こ");
-            error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
-            $name = DB::table('pets')->where('name', "こ")->value('id');
-            error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            // $name = DB::table('pets');
+            // error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            // $name = DB::table('pets')->where('name', "こ");
+            // error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            // $name = DB::table('pets')->where('name', "こ")->value('id');
+            // error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
 
-            # 今の名前を返信
-            $lineBot->replyText($replyToken, $name);
+            // # 今の名前を返信
+            // $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
             // $name = DB::table('pets')->where('id', 1)->update(['name' => $text]);
@@ -124,18 +124,18 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $Response);
             // #############################################################
             # データ取得
-            // $userId = $event->getUserId();
-            // $replyToken = $event->getReplyToken();
-            // $text = $event->getText();
+            $userId = $event->getUserId();
+            $replyToken = $event->getReplyToken();
+            $text = $event->getText();
 
-            // # 学生の呼び出し
-            // error_log("userid : " . $userId);
-            // $name = DB::table('students');
-            // error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
-            // $name = DB::table('students')->where('user_id', $userId);
-            // error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
-            // $name = DB::table('students')->where('user_id', $userId)->value('number');
-            // error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            # 学生の呼び出し
+            error_log("userid : " . $userId);
+            $name = DB::table('students');
+            error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e');
+            error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e')->value('number');
+            error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
