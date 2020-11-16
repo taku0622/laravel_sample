@@ -135,7 +135,7 @@ class LineBotController extends Controller
             $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e');
             error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
             $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e')->value('number');
-            error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
+            error_log("3" . $name);
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
