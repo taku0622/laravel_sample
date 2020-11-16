@@ -122,8 +122,12 @@ class LineBotController extends Controller
             $text = $event->getText();
 
             # 学生の呼び出し
+            $name = DB::table('students');
+            error_log("1" . $name);
+            $name = DB::table('students')->where('user_id', $userId);
+            error_log("2" . $name);
             $name = DB::table('students')->where('user_id', $userId)->value('number');
-            error_log($name);
+            error_log("3" . $name);
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
