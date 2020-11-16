@@ -130,10 +130,6 @@ class LineBotController extends Controller
 
             # 学生の呼び出し
             error_log("userid : " . $userId);
-            $name = DB::table('students');
-            error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
-            $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e');
-            error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
             $name = DB::table('students')->where('user_id', 'U6e0f4008a090ff5b5bef0323cae3428e')->value('number');
             error_log("3" . $name);
 
