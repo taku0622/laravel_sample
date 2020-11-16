@@ -123,11 +123,11 @@ class LineBotController extends Controller
 
             # 学生の呼び出し
             $name = DB::table('students');
-            error_log("1" . $name);
+            error_log("1" . json_encode($name, JSON_UNESCAPED_UNICODE));
             $name = DB::table('students')->where('user_id', $userId);
-            error_log("2" . $name);
+            error_log("2" . json_encode($name, JSON_UNESCAPED_UNICODE));
             $name = DB::table('students')->where('user_id', $userId)->value('number');
-            error_log("3" . $name);
+            error_log("3" . json_encode($name, JSON_UNESCAPED_UNICODE));
 
             # 今の名前を返信
             $lineBot->replyText($replyToken, $name);
