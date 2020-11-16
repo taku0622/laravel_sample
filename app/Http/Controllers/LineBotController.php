@@ -130,11 +130,11 @@ class LineBotController extends Controller
 
             # 学生の呼び出し
             error_log("userid : " . $userId);
-            $name = DB::table('students')->where('user_id', $userId)->value('number');
-            error_log("3" . $name);
+            $department = DB::table('students')->where('user_id', $userId)->value('department');
+            error_log($department);
 
             # 今の名前を返信
-            $lineBot->replyText($replyToken, $name);
+            $lineBot->replyText($replyToken, $department);
             ################################################################
         }
     }
