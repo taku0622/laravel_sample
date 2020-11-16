@@ -148,7 +148,10 @@ class LineBotController extends Controller
     }
     public function cancelInfo($department)
     {
-        return view('linebot.index');
+        $cancelInfomations = DB::table(' cancel_informations')->get();
+        foreach ($cancelInfomations as $user) {
+            error_log($user->lecture_name);
+        }
     }
 
     // public function watson($userId, $text)
