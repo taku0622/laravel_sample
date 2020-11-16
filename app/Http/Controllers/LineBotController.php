@@ -150,7 +150,7 @@ class LineBotController extends Controller
     public function cancelInfo($department)
     {
         $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
-        error_log("cancelInfomations: " . is_null($cancelInfomations));
+        error_log(is_null($cancelInfomations));
         error_log(gettype($cancelInfomations));
         if (!$cancelInfomations) {
             $message = "あなたの学部の休講案内はありません";
