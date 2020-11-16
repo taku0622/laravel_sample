@@ -137,7 +137,7 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $department);
             switch ($text) {
                 case '休講':
-                    $mesage = $this->cancelInfo($department);
+                    $message = $this->cancelInfo($department);
                     break;
                 default:
                     $message = $department;
@@ -149,15 +149,20 @@ class LineBotController extends Controller
     }
     public function cancelInfo($department)
     {
-        $cancelInfomations = DB::table('cancel_informations')->get();
-        foreach ($cancelInfomations as $cancelInfomation) {
-            error_log($cancelInfomation->date);
-            error_log($cancelInfomation->period);
-            error_log($cancelInfomation->lecture_name);
-            error_log($cancelInfomation->department);
-            error_log('https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/');
-            error_log('詳細');
+        $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
+        if ($cancelInfomations == NULL) {
+            $message = "あなたの学部の休講案内はありません";
+        } else {
+            foreach ($cancelInfomations as $cancelInfomation) {
+                error_log($cancelInfomation->date);
+                error_log($cancelInfomation->period);
+                error_log($cancelInfomation->lecture_name);
+                error_log($cancelInfomation->department);
+                error_log('https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/');
+                error_log('詳細');
+            }
         }
+        return $message;
     }
 
     // public function watson($userId, $text)
