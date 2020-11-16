@@ -80,7 +80,7 @@ class LineBotController extends Controller
 
 
             # ペットの呼び出し
-            $name = DB::table('students')->where('user_id', $userId)->value('number');
+            $name = DB::table('pets')->where('name', "shiro")->value('id');
             error_log($name);
 
             # 今の名前を返信
