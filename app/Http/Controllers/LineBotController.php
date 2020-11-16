@@ -134,9 +134,21 @@ class LineBotController extends Controller
             error_log($department);
 
             # 今の名前を返信
-            $lineBot->replyText($replyToken, $department);
+            // $lineBot->replyText($replyToken, $department);
+            switch ($text) {
+                case '休講':
+                    $this->cancelInfo($department);
+                    break;
+                default:
+                    $lineBot->replyText($replyToken, $department);
+                    break;
+            }
             ################################################################
         }
+    }
+    public function cancelInfo($department)
+    {
+        return view('linebot.index');
     }
 
     // public function watson($userId, $text)
