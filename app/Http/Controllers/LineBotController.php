@@ -148,7 +148,7 @@ class LineBotController extends Controller
     }
     public function cancelInfo($department)
     {
-        $cancelInfomations = DB::table(' cancel_informations')->get();
+        $cancelInfomations = DB::table('cancel_informations')->get();
         foreach ($cancelInfomations as $user) {
             error_log($user->lecture_name);
         }
