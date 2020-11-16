@@ -151,6 +151,7 @@ class LineBotController extends Controller
     {
         $cancelInfomations = DB::table('cancel_informations')->get();
         error_log(json_encode($cancelInfomations, JSON_UNESCAPED_UNICODE));
+        error_log(is_null($cancelInfomations));
         error_log(gettype($cancelInfomations));
         if (json_encode($cancelInfomations, JSON_UNESCAPED_UNICODE) == []) {
             $message = "あなたの学部の休講案内はありません";
