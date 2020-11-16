@@ -73,18 +73,18 @@ class LineBotController extends Controller
             // $lineBot->replyText($replyToken, $replyText);
             // $lineBot->replyText($replyToken, $replyText);
             #############################################################
-            # データ取得
-            $userId = $event->getUserId();
-            $replyToken = $event->getReplyToken();
-            $text = $event->getText();
+            // # データ取得
+            // $userId = $event->getUserId();
+            // $replyToken = $event->getReplyToken();
+            // $text = $event->getText();
 
 
-            # ペットの呼び出し
-            $name = DB::table('pets')->where('name', $text)->value('id');
-            error_log($name);
+            // # ペットの呼び出し
+            // $name = DB::table('pets')->where('name', $text)->value('id');
+            // error_log($name);
 
             # 今の名前を返信
-            $lineBot->replyText($replyToken, $name);
+            // $lineBot->replyText($replyToken, $name);
 
             # 名前の変更
             // $name = DB::table('pets')->where('id', 1)->update(['name' => $text]);
@@ -116,6 +116,18 @@ class LineBotController extends Controller
             // // $Response = $watson->watson($userId, $text);
             // $lineBot->replyText($replyToken, $Response);
             // #############################################################
+            # データ取得
+            $userId = $event->getUserId();
+            $replyToken = $event->getReplyToken();
+            $text = $event->getText();
+
+            # 学生の呼び出し
+            $name = DB::table('students')->where('user_id', $userId)->value('number');
+            error_log($name);
+
+            # 今の名前を返信
+            $lineBot->replyText($replyToken, $name);
+            ################################################################
         }
     }
 
