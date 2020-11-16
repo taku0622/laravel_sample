@@ -162,6 +162,7 @@ class LineBotController extends Controller
                 error_log('https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/');
                 error_log('詳細');
             }
+            $message = "あなたの学部の休講案内はあります";
         }
         return $message;
     }
