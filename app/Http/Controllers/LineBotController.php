@@ -158,7 +158,7 @@ class LineBotController extends Controller
                 $date = $cancelInfomation->date;
                 error_log($date);
                 error_log(gettype($date));
-                $message += $date . "　";
+                $message .= $date . "　";
                 // error_log($cancelInfomation->period);
                 // error_log($cancelInfomation->lecture_name);
                 // error_log($cancelInfomation->department);
