@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LineBotController;
+use App\Http\Controllers\SettingController;
 
 
 /*
@@ -21,6 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/restaurants', [LineBotController::class, 'restaurants']);
-Route::post('/talk_to_watson', [LineBotController::class, 'talkToWatson']);
+Route::post('/insert/students', [SettingController::class, 'insertStudent']);
 // Route::post('talk_to_watson', 'WatsonCallController@talkToWatson')->name('talk_to_watson');
 // Route::post('/restaurants', 'LineBotController@restaurants');
