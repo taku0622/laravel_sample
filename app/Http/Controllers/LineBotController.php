@@ -39,21 +39,6 @@ class LineBotController extends Controller
             if (!($event instanceof TextMessage)) {
                 continue;
             }
-            #############################################################
-            // # データ取得
-            // $userId = $event->getUserId();
-            // $replyToken = $event->getReplyToken();
-            // $text = $event->getText();
-            // if ($text == "質問") {
-            // $watson = new Watson();
-            // $Response = $watson->watson($userId, $text);
-            // } else {
-            //     $Response = "元気出して";
-            // }
-            // // $watson = new Watson();
-            // // $Response = $watson->watson($userId, $text);
-            // $lineBot->replyText($replyToken, $Response);
-            // #############################################################
             # データ取得
             $userId = $event->getUserId();
             $replyToken = $event->getReplyToken();
