@@ -149,22 +149,25 @@ class LineBotController extends Controller
     }
     public function cancelInfo($department)
     {
-        $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
-        error_log(json_encode($cancelInfomations, JSON_UNESCAPED_UNICODE));
-        error_log(is_null($cancelInfomations));
-        error_log(gettype($cancelInfomations));
+        $cancelInfomations = DB::table('cancel_informations')->get();
         if ($cancelInfomations->isEmpty()) {
             $message = "あなたの学部の休講案内はありません";
         } else {
+            $message = "";
             foreach ($cancelInfomations as $cancelInfomation) {
-                error_log($cancelInfomation->date);
-                error_log($cancelInfomation->period);
-                error_log($cancelInfomation->lecture_name);
-                error_log($cancelInfomation->department);
-                error_log('https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/');
-                error_log('詳細');
+                $message += $cancelInfomation->date;
+                $message += " ";
+                $message += $cancelInfomation->period;
+                $message += " ";
+                $message += $cancelInfomation->lecture_name;
+                $message += "\n";
+                $message += $cancelInfomation->department;
+                $message += "\n";
+                $message += 'https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/';
+                $message += "\n";
+                $message += '詳細';
+                $message += "\n";
             }
-            $message = "あなたの学部の休講案内はあります";
         }
         return $message;
     }
