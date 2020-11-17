@@ -167,6 +167,7 @@ class LineBotController extends Controller
             }
             // $message = "あなたの学部の休講案内はあります";
         }
+        error_log("ここまで来てるよ");
         return $message;
     }
 
