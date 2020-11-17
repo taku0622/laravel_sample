@@ -160,7 +160,6 @@ class LineBotController extends Controller
                 $message .= $cancelInfomation->lecture_name . "\n";
                 $message .= $cancelInfomation->department . "\n\n";
             }
-            // $message = "あなたの学部の休講案内はあります";
         }
         return $message;
     }
