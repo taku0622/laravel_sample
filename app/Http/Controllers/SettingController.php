@@ -9,6 +9,6 @@ class SettingController extends Controller
     public function restaurants(Request $request)
     {
         error_log("hello.....");
-        return "success connect~"
+        return "success connect~";
     }
 }
