@@ -155,13 +155,10 @@ class LineBotController extends Controller
         } else {
             $message = "";
             foreach ($cancelInfomations as $cancelInfomation) {
-                $date = $cancelInfomation->date;
-                error_log($date);
-                error_log(gettype($date));
-                $message .= $date . "　";
-                // error_log($cancelInfomation->period);
-                // error_log($cancelInfomation->lecture_name);
-                // error_log($cancelInfomation->department);
+                $message .= $cancelInfomation->date . "　";
+                $message .= $cancelInfomation->period . "　";
+                $message .= $cancelInfomation->lecture_name . "\n";
+                $message .= $cancelInfomation->department . "\n\n";
                 // error_log('https://service.cloud.teu.ac.jp/inside2/hachiouji/hachioji_common/cancel/');
                 // error_log('詳細');
             }
