@@ -149,11 +149,11 @@ class LineBotController extends Controller
     }
     public function cancelInfo($department)
     {
-        $cancelInfomations = DB::table('cancel_informations')->get();
+        $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
         error_log(json_encode($cancelInfomations, JSON_UNESCAPED_UNICODE));
         error_log(is_null($cancelInfomations));
         error_log(gettype($cancelInfomations));
-        if (json_encode($cancelInfomations, JSON_UNESCAPED_UNICODE) == []) {
+        if ($cancelInfomations->isEmpty()) {
             $message = "あなたの学部の休講案内はありません";
         } else {
             foreach ($cancelInfomations as $cancelInfomation) {
