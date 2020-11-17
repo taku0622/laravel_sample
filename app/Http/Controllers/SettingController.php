@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function restaurants(Request $request)
+    public function insertStudent(Request $request)
     {
         error_log("hello.....");
         return "success connect~";
