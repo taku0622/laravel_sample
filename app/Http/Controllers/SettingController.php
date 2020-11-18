@@ -17,13 +17,13 @@ class SettingController extends Controller
         $number = $event["number"];
         error_log($number);
         $push_new = $event["push_new"];
-        error_log($push_new);
+        error_log(is_null($push_new));
         $push_important = $event["push_important"];
-        error_log($push_important);
+        error_log(is_null($push_important));
         $push_cancel = $event["push_cancel"];
-        error_log($push_cancel);
+        error_log(is_null($push_cancel));
         $push_event = $event["push_event"];
-        error_log($push_event);
+        error_log(is_null($push_event));
         return "success connect~";
     }
 }
