@@ -20,8 +20,27 @@ class SettingController extends Controller
         $push_cancel = $event["push_cancel"]; //true
         $push_event = $event["push_event"]; //true
         // 学部判定
-        $department = substr($number, 0, 2);
-        error_log($department);
+        $numTwoDigits = substr($number, 0, 2);
+        switch ($numTwoDigits) {
+            case 'B0':
+                $department = 'BS';
+                break;
+            case 'C0':
+                $department = 'CS';
+                break;
+            case 'M0':
+                $department = 'MS';
+                break;
+            case 'E0':
+                $department = 'ES';
+                break;
+            case 'D0':
+                $department = 'DS';
+                break;
+            case 'H0':
+                $department = 'HS';
+                break;
+        }
         // DB::table('students')->insert([
         //     'user_id' => $userId,
         //     'number' => $number,
