@@ -70,7 +70,7 @@ class LineBotController extends Controller
         if ($cancelInfomations->isEmpty()) {
             $message = "あなたの学部の休講案内はありません";
             date_default_timezone_set('Asia/Tokyo');
-            $today = date("Y-m-d");
+            $today = date("Y-m-d H:i:s");
             error_log($today);
         } else {
             $message = "";
