@@ -41,6 +41,7 @@ class SettingController extends Controller
                 $department = 'HS';
                 break;
         }
+        error_log($department);
         // DB::table('students')->insert([
         //     'user_id' => $userId,
         //     'number' => $number,
