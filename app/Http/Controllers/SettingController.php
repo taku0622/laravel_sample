@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Hamcrest\Text\IsEmptyString;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -16,13 +16,21 @@ class SettingController extends Controller
         $userId = $event["id"];
         $number = $event["number"];
         $push_new = $event["push_new"]; //false
-        error_log(empty($push_new));
         $push_important = $event["push_important"]; //false
-        error_log(empty($push_important));
         $push_cancel = $event["push_cancel"]; //true
-        error_log(empty($push_cancel));
         $push_event = $event["push_event"]; //true
-        error_log(empty($push_event));
+        // 学部判定
+        $department = substr($number, 0, 2);
+        error_log($department);
+        // DB::table('students')->insert([
+        //     'user_id' => $userId,
+        //     'number' => $number,
+        //     'department' => $department,
+        //     'push_new' => $push_new,
+        //     'push_important' => $push_important,
+        //     'push_cancel' => $push_cancel,
+        //     'push_event' => $push_event,
+        // ]);
         return "success connect~";
     }
 }
