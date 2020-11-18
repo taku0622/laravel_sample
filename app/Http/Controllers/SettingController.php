@@ -41,16 +41,16 @@ class SettingController extends Controller
                 $department = 'HS';
                 break;
         }
-        error_log($department);
-        // DB::table('students')->insert([
-        //     'user_id' => $userId,
-        //     'number' => $number,
-        //     'department' => $department,
-        //     'push_new' => $push_new,
-        //     'push_important' => $push_important,
-        //     'push_cancel' => $push_cancel,
-        //     'push_event' => $push_event,
-        // ]);
+        // error_log($department);
+        DB::table('students')->insert([
+            'user_id' => $userId,
+            'number' => $number,
+            'department' => $department,
+            'push_new' => $push_new,
+            'push_important' => $push_important,
+            'push_cancel' => $push_cancel,
+            'push_event' => $push_event,
+        ]);
         return "success connect~";
     }
 }
