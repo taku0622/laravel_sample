@@ -40,6 +40,14 @@ class SettingController extends Controller
             case 'H0':
                 $department = 'HS';
                 break;
+            case 'D1':
+            case 'D2':
+            case 'D3':
+                $department = '院八';
+                break;
+            default:
+                $department = '';
+                break;
         }
         // error_log($department);
         DB::table('students')->insert([
