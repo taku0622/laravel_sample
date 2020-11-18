@@ -69,6 +69,7 @@ class LineBotController extends Controller
         $cancelInfomations = DB::table('cancel_informations')->where('department', $department)->get();
         if ($cancelInfomations->isEmpty()) {
             $message = "あなたの学部の休講案内はありません";
+            date_default_timezone_set('Asia/Tokyo');
             $today = date("Y-m-d");
             error_log($today);
         } else {
