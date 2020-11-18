@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hamcrest\Text\IsEmptyString;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -13,17 +14,15 @@ class SettingController extends Controller
         $events = json_decode($request->getContent(), true);
         $event = $events[0];
         $userId = $event["id"];
-        error_log($userId);
         $number = $event["number"];
-        error_log($number);
-        $push_new = $event["push_new"];
-        error_log(is_null($push_new));
-        $push_important = $event["push_important"];
-        error_log(is_null($push_important));
-        $push_cancel = $event["push_cancel"];
-        error_log(is_null($push_cancel));
-        $push_event = $event["push_event"];
-        error_log(is_null($push_event));
+        $push_new = $event["push_new"]; //false
+        error_log(empty($push_new));
+        $push_important = $event["push_important"]; //false
+        error_log(empty($push_important));
+        $push_cancel = $event["push_cancel"]; //true
+        error_log(empty($push_cancel));
+        $push_event = $event["push_event"]; //true
+        error_log(empty($push_event));
         return "success connect~";
     }
 }
