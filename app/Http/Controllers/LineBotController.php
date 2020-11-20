@@ -90,7 +90,9 @@ class LineBotController extends Controller
 
     public function newInfo($department)
     {
-        // $cancelInfomations = DB::table('informations')->where('department', $department)->get();
+        $infomations = DB::table('informations')
+            ->join('tags', 'informations.id', '=', 'information_id')
+            ->where('department', $department)->get();
         // if ($cancelInfomations->isEmpty()) {
         //     $message = "あなたの学部の休講案内はありません";
         //     // 時間の取得
