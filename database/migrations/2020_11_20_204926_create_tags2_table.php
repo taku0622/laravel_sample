@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeAllToWholeTags2Table extends Migration
+class CreateTags2Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ChangeAllToWholeTags2Table extends Migration
      */
     public function up()
     {
-        Schema::table('tags2', function (Blueprint $table) {
+        Schema::create('tags2', function (Blueprint $table) {
             $table->id();
             $table->boolean('whole'); // 1
             $table->boolean('important'); // 2
@@ -46,8 +46,6 @@ class ChangeAllToWholeTags2Table extends Migration
      */
     public function down()
     {
-        Schema::table('tags2', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tags2');
     }
 }
