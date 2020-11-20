@@ -55,6 +55,9 @@ class LineBotController extends Controller
                 case '休講':
                     $message = $this->cancelInfo($department);
                     break;
+                case '新着':
+                    $message = $this->newInfo($department);
+                    break;
                 default:
                     $watson = new Watson();
                     $message = $watson->watson($userId, $text);
@@ -82,6 +85,28 @@ class LineBotController extends Controller
                 $message .= $cancelInfomation->department . "\n\n";
             }
         }
+        return $message;
+    }
+
+    public function newInfo($department)
+    {
+        // $cancelInfomations = DB::table('informations')->where('department', $department)->get();
+        // if ($cancelInfomations->isEmpty()) {
+        //     $message = "あなたの学部の休講案内はありません";
+        //     // 時間の取得
+        //     date_default_timezone_set('Asia/Tokyo');
+        //     $today = date("Y-m-d H:i:s");
+        //     error_log($today);
+        // } else {
+        //     $message = "";
+        //     foreach ($cancelInfomations as $cancelInfomation) {
+        //         $message .= $cancelInfomation->date . "　";
+        //         $message .= $cancelInfomation->period . "　";
+        //         $message .= $cancelInfomation->lecture_name . "\n";
+        //         $message .= $cancelInfomation->department . "\n\n";
+        //     }
+        // }
+        $message = "あなたは" . $department . "学部です";
         return $message;
     }
 }
