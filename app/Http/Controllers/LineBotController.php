@@ -91,24 +91,24 @@ class LineBotController extends Controller
     public function newInfo($department)
     {
         $infomations = DB::table('informations')
-            ->join('tags', 'informations.id', '=', 'information_id')
-            ->where('department', $department)->get();
-        // if ($cancelInfomations->isEmpty()) {
-        //     $message = "あなたの学部の休講案内はありません";
-        //     // 時間の取得
-        //     date_default_timezone_set('Asia/Tokyo');
-        //     $today = date("Y-m-d H:i:s");
-        //     error_log($today);
-        // } else {
-        //     $message = "";
-        //     foreach ($cancelInfomations as $cancelInfomation) {
-        //         $message .= $cancelInfomation->date . "　";
-        //         $message .= $cancelInfomation->period . "　";
-        //         $message .= $cancelInfomation->lecture_name . "\n";
-        //         $message .= $cancelInfomation->department . "\n\n";
-        //     }
-        // }
-        $message = "あなたは" . $department . "学部です";
+            ->join('tags6', 'informations.id', '=', 'information_id')
+            ->whereNull('important')->get();
+        if ($infomations->isEmpty()) {
+            $message = "新着情報はありません";
+            // 時間の取得
+            date_default_timezone_set('Asia/Tokyo');
+            $today = date("Y-m-d H:i:s");
+            error_log($today);
+        } else {
+            $message = "";
+            foreach ($infomations as $infomation) {
+                $message .= $infomation->title . "　";
+                $message .= $infomation->content . "　";
+                // $message .= $infomation->lecture_name . "\n";
+                // $message .= $infomation->department . "\n\n";
+            }
+        }
+        // $message = "あなたは" . $department . "学部です";
         return $message;
     }
 }
