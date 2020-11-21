@@ -94,7 +94,7 @@ class LineBotController extends Controller
     public function newInfo($department)
     {
         $infomations = DB::table('informations')
-            ->join('tags6', 'informations.id', '=', 'information_id')
+            ->join('tags6', 'informations.id', '=', 'tags6.information_id')
             ->where($department, true)->whereNull('important')
             ->orderBy('posted_date', 'desc')->limit(5)->get();
         if ($infomations->isEmpty()) {
@@ -117,7 +117,7 @@ class LineBotController extends Controller
     public function importantInfo()
     {
         $infomations = DB::table('informations')
-            ->join('tags6', 'informations.id', '=', 'information_id')
+            ->join('tags6', 'informations.id', '=', 'tags6.information_id')
             ->where('important', true)
             ->orderBy('posted_date', 'desc')->limit(5)->get();
         if ($infomations->isEmpty()) {
