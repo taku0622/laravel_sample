@@ -93,7 +93,7 @@ class LineBotController extends Controller
         $infomations = DB::table('informations')
             ->join('tags6', 'informations.id', '=', 'information_id')
             ->where($department, true)->whereNull('important')
-            ->orderBy('posted_date', 'asc')->get();
+            ->orderBy('posted_date', 'desc')->limit(5)->get();
         if ($infomations->isEmpty()) {
             $message = "新着情報はありません";
             // 時間の取得
