@@ -104,8 +104,7 @@ class LineBotController extends Controller
             foreach ($infomations as $infomation) {
                 $message .= $infomation->title . "　";
                 $message .= $infomation->content . "　";
-                // $message .= $infomation->lecture_name . "\n";
-                // $message .= $infomation->department . "\n\n";
+                $message .= "\n";
             }
         }
         // $message = "あなたは" . $department . "学部です";
