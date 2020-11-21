@@ -58,6 +58,9 @@ class LineBotController extends Controller
                 case '新着':
                     $message = $this->newInfo($department);
                     break;
+                case '重要':
+                    $message = $this->importantInfo();
+                    break;
                 default:
                     $watson = new Watson();
                     $message = $watson->watson($userId, $text);
@@ -97,9 +100,9 @@ class LineBotController extends Controller
         if ($infomations->isEmpty()) {
             $message = "新着情報はありません";
             // 時間の取得
-            date_default_timezone_set('Asia/Tokyo');
-            $today = date("Y-m-d H:i:s");
-            error_log($today);
+            // date_default_timezone_set('Asia/Tokyo');
+            // $today = date("Y-m-d H:i:s");
+            // error_log($today);
         } else {
             $message = "";
             foreach ($infomations as $infomation) {
@@ -108,7 +111,25 @@ class LineBotController extends Controller
                 $message .= "\n";
             }
         }
-        // $message = "あなたは" . $department . "学部です";
+        return $message;
+    }
+
+    public function importantInfo()
+    {
+        $infomations = DB::table('informations')
+            ->join('tags6', 'informations.id', '=', 'information_id')
+            ->where('important', true)
+            ->orderBy('posted_date', 'desc')->limit(5)->get();
+        if ($infomations->isEmpty()) {
+            $message = "重要情報はありません";
+        } else {
+            $message = "";
+            foreach ($infomations as $infomation) {
+                $message .= $infomation->title . "　";
+                $message .= $infomation->content . "　";
+                $message .= "\n";
+            }
+        }
         return $message;
     }
 }
