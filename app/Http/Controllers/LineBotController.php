@@ -138,7 +138,8 @@ class LineBotController extends Controller
 
     public function eventInfo()
     {
-        $eventInfomations = DB::table('event_informations')->get();
+        $eventInfomations = DB::table('event_informations')
+            ->orderBy('posted_date', 'desc')->get();
         if ($eventInfomations->isEmpty()) {
             $message = "イベントはありません";
             // 時間の取得
