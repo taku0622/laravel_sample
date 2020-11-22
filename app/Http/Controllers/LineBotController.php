@@ -179,7 +179,7 @@ class LineBotController extends Controller
             error_log(count($referenceInfomations));
             $count = count($referenceInfomations);
             if ($count > 1) {
-                $message = "講師の名前を入力してください";
+                $message = $count . "件見つかりました。\n講師の名前を入力してください";
             } else {
                 $referenceInfomation = $referenceInfomations->first();
                 error_log($referenceInfomation->reference_name);
