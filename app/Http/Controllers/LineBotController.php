@@ -138,21 +138,21 @@ class LineBotController extends Controller
 
     public function eventInfo()
     {
-        // $infomations = DB::table('informations')
-        // ->join('tags6', 'informations.id', '=', 'tags6.information_id')
-        // ->where('important', true)
-        //     ->orderBy('posted_date', 'desc')->limit(10)->get();
-        // if ($infomations->isEmpty()) {
-        //     $message = "重要情報はありません";
-        // } else {
-        //     $message = "";
-        //     foreach ($infomations as $infomation) {
-        //         $message .= $infomation->title . "　";
-        //         $message .= $infomation->content . "　";
-        //         $message .= "\n";
-        //     }
-        // }
-        $message = "イベントよ";
+        $eventInfomations = DB::table('event_informations')->get();
+        if ($eventInfomations->isEmpty()) {
+            $message = "イベントはありません";
+            // 時間の取得
+            date_default_timezone_set('Asia/Tokyo');
+            $today = date("Y-m-d H:i:s");
+            error_log($today);
+        } else {
+            $message = "";
+            foreach ($eventInfomations as $eventInfomation) {
+                $message .= $eventInfomation->title . "　";
+                $message .= $eventInfomation->content . "　";
+                $message .= "\n";
+            }
+        }
         return $message;
     }
 }
