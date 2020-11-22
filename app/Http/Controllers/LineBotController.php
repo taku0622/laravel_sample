@@ -72,7 +72,7 @@ class LineBotController extends Controller
                     $message = $watson->watson($userId, $text);
                     break;
                 default:
-                    $message = "すみません。解釈できませんでした。\nメニューから入力をお願いします。";
+                    $message = $this->referenceInfo($text);
                     break;
             }
             $lineBot->replyText($replyToken, $message);
@@ -161,6 +161,30 @@ class LineBotController extends Controller
                 $message .= $content . "　";
                 $message .= "\n";
             }
+        }
+        return $message;
+    }
+
+    public function referenceInfo($text)
+    {
+        $referenceInfomations = DB::table('reference_informations')
+            ->where('lecture_name', $text)->get();
+        if ($referenceInfomations->isEmpty()) {
+            $message = "正しい講義名を入力してください";
+            // 時間の取得
+            date_default_timezone_set('Asia/Tokyo');
+            $today = date("Y-m-d H:i:s");
+            error_log($today);
+        } else {
+            error_log(count($$referenceInfomations));
+            $message = count($$referenceInfomations) . "件見つかりました";
+            // foreach ($eventInfomations as $eventInfomation) {
+            //     $title = mb_substr($eventInfomation->title, 0, 40);
+            //     $message .= $title . "　";
+            //     $content = mb_substr($eventInfomation->content, 0, 60);
+            //     $message .= $content . "　";
+            //     $message .= "\n";
+            // }
         }
         return $message;
     }
