@@ -176,8 +176,8 @@ class LineBotController extends Controller
             $today = date("Y-m-d H:i:s");
             error_log($today);
         } else {
-            error_log(count($$referenceInfomations));
-            $message = count($$referenceInfomations) . "件見つかりました";
+            error_log(count($referenceInfomations));
+            $message = count($referenceInfomations) . "件見つかりました";
             // foreach ($eventInfomations as $eventInfomation) {
             //     $title = mb_substr($eventInfomation->title, 0, 40);
             //     $message .= $title . "　";
