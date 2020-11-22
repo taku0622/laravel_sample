@@ -182,8 +182,8 @@ class LineBotController extends Controller
                 $message = "講師の名前を入力してください";
             } else {
                 $referenceInfomation = $referenceInfomations->first();
-                error_log($referenceInfomation);
-                // $message = "参考書は" . $referenceInfomations[0]
+                error_log($referenceInfomation->reference_name);
+                $message = "参考書は" . $referenceInfomation->reference_name . "です。";
             }
             // foreach ($eventInfomations as $eventInfomation) {
             //     $title = mb_substr($eventInfomation->title, 0, 40);
