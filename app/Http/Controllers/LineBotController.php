@@ -64,9 +64,12 @@ class LineBotController extends Controller
                 case 'イベント':
                     $message = $this->eventInfo();
                     break;
-                default:
+                case '質問':
                     $watson = new Watson();
                     $message = $watson->watson($userId, $text);
+                    break;
+                default:
+                    $message = "すみません。解釈できませんでした。\nメニューから入力をお願いします。";
                     break;
             }
             $lineBot->replyText($replyToken, $message);
