@@ -177,7 +177,14 @@ class LineBotController extends Controller
             error_log($today);
         } else {
             error_log(count($referenceInfomations));
-            $message = count($referenceInfomations) . "件見つかりました";
+            $count = count($referenceInfomations);
+            if ($count > 1) {
+                $message = "講師の名前を入力してください";
+            } else {
+                error_log($referenceInfomations);
+                error_log($referenceInfomations[0]);
+                // $message = "参考書は" . $referenceInfomations[0]
+            }
             // foreach ($eventInfomations as $eventInfomation) {
             //     $title = mb_substr($eventInfomation->title, 0, 40);
             //     $message .= $title . "　";
