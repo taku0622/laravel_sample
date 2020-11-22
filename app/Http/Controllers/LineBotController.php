@@ -148,8 +148,10 @@ class LineBotController extends Controller
         } else {
             $message = "";
             foreach ($eventInfomations as $eventInfomation) {
-                $message .= $eventInfomation->title . "　";
-                $message .= $eventInfomation->content . "　";
+                $title = mb_substr($eventInfomation->title, 0, 40);
+                $message .= $title . "　";
+                $content = mb_substr($eventInfomation->content, 0, 60);
+                $message .= $content . "　";
                 $message .= "\n";
             }
         }
