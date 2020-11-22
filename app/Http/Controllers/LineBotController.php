@@ -182,6 +182,7 @@ class LineBotController extends Controller
                 $message = "講師の名前を入力してください";
             } else {
                 error_log($referenceInfomations);
+                $referenceInfomations = json_decode($referenceInfomations, true);
                 error_log($referenceInfomations[0]);
                 // $message = "参考書は" . $referenceInfomations[0]
             }
