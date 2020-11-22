@@ -61,6 +61,9 @@ class LineBotController extends Controller
                 case '重要':
                     $message = $this->importantInfo();
                     break;
+                case 'イベント':
+                    $message = $this->eventInfo();
+                    break;
                 default:
                     $watson = new Watson();
                     $message = $watson->watson($userId, $text);
@@ -119,7 +122,7 @@ class LineBotController extends Controller
         $infomations = DB::table('informations')
             ->join('tags6', 'informations.id', '=', 'tags6.information_id')
             ->where('important', true)
-            ->orderBy('posted_date', 'desc')->limit(5)->get();
+            ->orderBy('posted_date', 'desc')->limit(10)->get();
         if ($infomations->isEmpty()) {
             $message = "重要情報はありません";
         } else {
@@ -130,6 +133,26 @@ class LineBotController extends Controller
                 $message .= "\n";
             }
         }
+        return $message;
+    }
+
+    public function eventInfo()
+    {
+        // $infomations = DB::table('informations')
+        // ->join('tags6', 'informations.id', '=', 'tags6.information_id')
+        // ->where('important', true)
+        //     ->orderBy('posted_date', 'desc')->limit(10)->get();
+        // if ($infomations->isEmpty()) {
+        //     $message = "重要情報はありません";
+        // } else {
+        //     $message = "";
+        //     foreach ($infomations as $infomation) {
+        //         $message .= $infomation->title . "　";
+        //         $message .= $infomation->content . "　";
+        //         $message .= "\n";
+        //     }
+        // }
+        $message = "イベントよ";
         return $message;
     }
 }
